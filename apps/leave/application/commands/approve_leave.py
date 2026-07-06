@@ -12,6 +12,7 @@ from typing import Dict, Any
 from apps.common.exceptions import LeaveNotFoundException, InvalidLeaveStatusException
 from apps.leave.domain.ports.leave_port import LeavePort
 from apps.leave.domain.services.leave_service import LeaveService
+from apps.leave.domain.entities.leave_request import LeaveRequest
 
 logger = logging.getLogger(__name__)
 

@@ -9,7 +9,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-# Import viewsets (will be created later, but import now for URL routing)
+# Import viewsets
 from apps.employees.presentation.views import EmployeeViewSet
 from apps.departments.presentation.views import DepartmentViewSet
 from apps.leave.presentation.views import LeaveViewSet
