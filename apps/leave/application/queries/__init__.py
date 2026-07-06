@@ -1,0 +1,1 @@
+# Query handlers for Leave app
