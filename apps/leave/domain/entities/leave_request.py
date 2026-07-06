@@ -33,12 +33,12 @@ class LeaveRequest:
         reviewed_at: Date and time the request was reviewed
         created_at: Auto-set on creation
     """
-    id: UUID = field(default_factory=uuid4)
     employee_id: UUID
     leave_type: str  # ANNUAL, SICK, UNPAID, MATERNITY
     start_date: date
     end_date: date
     status: str = 'PENDING'  # PENDING, APPROVED, REJECTED
+    id: UUID = field(default_factory=uuid4)
     reason: Optional[str] = None
     reviewed_by: Optional[UUID] = None
     reviewed_at: Optional[datetime] = None

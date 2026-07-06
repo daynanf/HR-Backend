@@ -27,9 +27,9 @@ class Department:
         description: Optional description
         is_active: Whether the department is active
     """
-    id: UUID = field(default_factory=uuid4)
     code: str
     name: str
+    id: UUID = field(default_factory=uuid4)
     description: Optional[str] = None
     is_active: bool = True
     

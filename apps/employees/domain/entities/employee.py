@@ -36,16 +36,21 @@ class Employee:
         created_at: Auto-set on creation
         updated_at: Auto-updated on changes
     """
-    id: UUID = field(default_factory=uuid4)
+    # ===== Required =====
+
     employee_number: str
     first_name: str
     last_name: str
     email: str
+    job_title: str
+    employment_type: str
+    hire_date: date
+
+    # ===== Optional =====
+
+    id: UUID = field(default_factory=uuid4)
     phone: Optional[str] = None
     department_id: UUID = None
-    job_title: str
-    employment_type: str  # FULL_TIME, PART_TIME, CONTRACT
-    hire_date: date
     is_active: bool = True
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
