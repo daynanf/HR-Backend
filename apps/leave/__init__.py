@@ -1,0 +1,1 @@
+# Leave app - Bounded Context for Leave Management

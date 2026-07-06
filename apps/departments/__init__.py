@@ -1,0 +1,1 @@
+# Departments app - Bounded Context for Department Management

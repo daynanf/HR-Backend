@@ -1,0 +1,1 @@
+# Employees app - Bounded Context for Employee Management

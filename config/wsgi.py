@@ -1,5 +1,5 @@
 """
-WSGI config for config project.
+WSGI config for HR & Employee Management Backend project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
