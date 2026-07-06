@@ -1,0 +1,1 @@
+# Integration tests - Repository layer (uses test database)
