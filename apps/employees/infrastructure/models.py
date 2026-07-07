@@ -27,12 +27,7 @@ class EmployeeModel(models.Model):
         PART_TIME = 'PART_TIME', 'Part Time'
         CONTRACT = 'CONTRACT', 'Contract'
     
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-        help_text="Unique identifier for the employee"
-    )
+    
     employee_number = models.CharField(
         max_length=20,
         unique=True,
@@ -53,18 +48,7 @@ class EmployeeModel(models.Model):
         validators=[EmailValidator()],
         help_text="Unique email address"
     )
-    phone = models.CharField(
-        max_length=20,
-        blank=True,
-        null=True,
-        help_text="Optional phone number"
-    )
-    department = models.ForeignKey(
-        'departments.DepartmentModel',
-        on_delete=models.PROTECT,  # Prevent deletion if employees exist
-        related_name='employees',
-        help_text="Reference to Department"
-    )
+    
     job_title = models.CharField(
         max_length=100,
         help_text="Employee's job title"
@@ -77,6 +61,24 @@ class EmployeeModel(models.Model):
     )
     hire_date = models.DateField(
         help_text="Date the employee was hired"
+    )
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+        help_text="Unique identifier for the employee"
+    )
+    phone = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        help_text="Optional phone number"
+    )
+    department = models.ForeignKey(
+        'departments.DepartmentModel',
+        on_delete=models.PROTECT,  # Prevent deletion if employees exist
+        related_name='employees',
+        help_text="Reference to Department"
     )
     is_active = models.BooleanField(
         default=True,

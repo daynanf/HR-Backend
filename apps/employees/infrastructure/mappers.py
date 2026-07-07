@@ -34,16 +34,19 @@ class EmployeeMapper:
             Employee: Domain entity (pure Python dataclass)
         """
         return Employee(
-            id=model.id,
             employee_number=model.employee_number,
             first_name=model.first_name,
             last_name=model.last_name,
             email=model.email,
-            phone=model.phone,
-            department_id=model.department_id,
             job_title=model.job_title,
             employment_type=model.employment_type,
             hire_date=model.hire_date,
+            
+            # optional fields
+            
+            id=model.id,
+            phone=model.phone,
+            department_id=model.department_id,
             is_active=model.is_active,
             created_at=model.created_at,
             updated_at=model.updated_at,
@@ -63,17 +66,17 @@ class EmployeeMapper:
         Returns:
             dict: Dictionary for ORM create/update
         """
-        return {
-            'id': entity.id,
+        return {            
             'employee_number': entity.employee_number,
             'first_name': entity.first_name,
             'last_name': entity.last_name,
-            'email': entity.email,
-            'phone': entity.phone,
-            'department_id': entity.department_id,
+            'email': entity.email,            
             'job_title': entity.job_title,
             'employment_type': entity.employment_type,
             'hire_date': entity.hire_date,
+            'id': entity.id,
+            'phone': entity.phone,
+            'department_id': entity.department_id,
             'is_active': entity.is_active,
         }
     
