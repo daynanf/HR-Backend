@@ -11,6 +11,7 @@ Views never call repositories directly - they go through the application layer.
 from typing import Optional, List, Dict
 from uuid import UUID
 from datetime import date, datetime
+from django.utils import timezone
 from django.db import transaction
 from django.db.models import Q, Count
 
@@ -129,7 +130,7 @@ class LeaveRepository(LeavePort):
                 # Update the model
                 model.status = 'APPROVED'
                 model.reviewed_by_id = reviewed_by
-                model.reviewed_at = datetime.now()
+                model.reviewed_at = timezone.now()
                 model.save()
                 
                 return LeaveRequestMapper.to_entity(model)
@@ -165,7 +166,7 @@ class LeaveRepository(LeavePort):
                 # Update the model
                 model.status = 'REJECTED'
                 model.reviewed_by_id = reviewed_by
-                model.reviewed_at = datetime.now()
+                model.reviewed_at = timezone.now()
                 model.save()
                 
                 return LeaveRequestMapper.to_entity(model)

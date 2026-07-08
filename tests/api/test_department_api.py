@@ -81,7 +81,8 @@ class TestDepartmentAPI(TestCase):
             'description': 'Finance Department',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['code'], 'FIN')
@@ -96,7 +97,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'Finance',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['code'], 'FIN')
@@ -110,7 +112,8 @@ class TestDepartmentAPI(TestCase):
             'description': 'Another Engineering Department',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -122,7 +125,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'Invalid Department',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -134,7 +138,8 @@ class TestDepartmentAPI(TestCase):
             'name': '',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -146,7 +151,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'Engineering',
         }
         
-        response = self.client.post('/api/departments/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/departments/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -159,7 +165,8 @@ class TestDepartmentAPI(TestCase):
             'description': 'Updated Software Engineering Department',
         }
         
-        response = self.client.put(f'/api/departments/{self.department.id}/', data)
+        # FIX: Add format='json'
+        response = self.client.put(f'/api/departments/{self.department.id}/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['code'], 'SOFT')
@@ -172,7 +179,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'Software Engineering',
         }
         
-        response = self.client.patch(f'/api/departments/{self.department.id}/', data)
+        # FIX: Use PATCH with format='json'
+        response = self.client.patch(f'/api/departments/{self.department.id}/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['code'], 'ENG')  # Unchanged
@@ -186,7 +194,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'Engineering',
         }
         
-        response = self.client.put(f'/api/departments/{self.department.id}/', data)
+        # FIX: Add format='json'
+        response = self.client.put(f'/api/departments/{self.department.id}/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -198,7 +207,8 @@ class TestDepartmentAPI(TestCase):
             'name': 'New Department',
         }
         
-        response = self.client.put(f'/api/departments/{uuid4()}/', data)
+        # FIX: Add format='json'
+        response = self.client.put(f'/api/departments/{uuid4()}/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
     

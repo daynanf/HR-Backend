@@ -17,6 +17,7 @@ from apps.employees.infrastructure.repository import EmployeeRepository
 from apps.departments.domain.entities.department import Department
 from apps.departments.infrastructure.repository import DepartmentRepository
 from apps.departments.infrastructure.models import DepartmentModel
+from apps.employees.infrastructure.models import EmployeeModel
 
 from apps.leave.domain.entities.leave_request import LeaveRequest
 from apps.leave.infrastructure.repository import LeaveRepository

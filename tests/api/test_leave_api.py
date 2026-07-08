@@ -67,7 +67,8 @@ class TestLeaveAPI(TestCase):
             'reason': 'Family vacation',
         }
         
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['employee_id'], str(self.employee.id))
@@ -86,7 +87,8 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-15',
         }
         
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['leave_type'], 'SICK')
@@ -102,7 +104,8 @@ class TestLeaveAPI(TestCase):
             'reason': 'Invalid dates',
         }
         
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -115,7 +118,8 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-15',
         }
         
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
     
@@ -128,7 +132,8 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-15',
         }
         
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -143,12 +148,14 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-15',
             'reason': 'First leave',
         }
-        response1 = self.client.post('/api/leave/', data1)
+        # FIX: Add format='json'
+        response1 = self.client.post('/api/leave/', data1, format='json')
         self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
         
         # Approve the first leave
         leave_id = response1.data['id']
-        self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         # Submit overlapping leave
         data2 = {
@@ -158,7 +165,8 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-18',
             'reason': 'Overlapping leave',
         }
-        response2 = self.client.post('/api/leave/', data2)
+        # FIX: Add format='json'
+        response2 = self.client.post('/api/leave/', data2, format='json')
         
         self.assertEqual(response2.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response2.data)
@@ -173,12 +181,14 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-15',
             'reason': 'First leave',
         }
-        response1 = self.client.post('/api/leave/', data1)
+        # FIX: Add format='json'
+        response1 = self.client.post('/api/leave/', data1, format='json')
         self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
         
         # Approve the first leave
         leave_id = response1.data['id']
-        self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         # Submit non-overlapping leave
         data2 = {
@@ -188,7 +198,8 @@ class TestLeaveAPI(TestCase):
             'end_date': '2025-06-25',
             'reason': 'Non-overlapping leave',
         }
-        response2 = self.client.post('/api/leave/', data2)
+        # FIX: Add format='json'
+        response2 = self.client.post('/api/leave/', data2, format='json')
         
         self.assertEqual(response2.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response2.data['status'], 'PENDING')
@@ -298,11 +309,13 @@ class TestLeaveAPI(TestCase):
             'start_date': '2025-06-10',
             'end_date': '2025-06-15',
         }
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         leave_id = response.data['id']
         
         # Approve it
-        response = self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        response = self.client.patch(f'/api/leave/{leave_id}/approve/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['status'], 'APPROVED')
@@ -321,7 +334,8 @@ class TestLeaveAPI(TestCase):
             status='APPROVED',
         )
         
-        response = self.client.patch(f'/api/leave/{leave.id}/approve/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        response = self.client.patch(f'/api/leave/{leave.id}/approve/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
@@ -335,11 +349,13 @@ class TestLeaveAPI(TestCase):
             'start_date': '2025-06-10',
             'end_date': '2025-06-15',
         }
-        response = self.client.post('/api/leave/', data)
+        # FIX: Add format='json'
+        response = self.client.post('/api/leave/', data, format='json')
         leave_id = response.data['id']
         
         # Reject it
-        response = self.client.patch(f'/api/leave/{leave_id}/reject/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        response = self.client.patch(f'/api/leave/{leave_id}/reject/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['status'], 'REJECTED')
@@ -358,14 +374,16 @@ class TestLeaveAPI(TestCase):
             status='APPROVED',
         )
         
-        response = self.client.patch(f'/api/leave/{leave.id}/reject/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        response = self.client.patch(f'/api/leave/{leave.id}/reject/', {'reviewed_by': str(self.employee.id)}, format='json')
         
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
     
     def test_approve_nonexistent_leave_returns_404(self):
         """Test that approving a nonexistent leave returns 404."""
-        response = self.client.patch(f'/api/leave/{uuid4()}/approve/', {'reviewed_by': str(self.employee.id)})
+        # FIX: Add format='json'
+        response = self.client.patch(f'/api/leave/{uuid4()}/approve/', {'reviewed_by': str(self.employee.id)}, format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
     
     def test_on_leave_count_returns_correct_count(self):
@@ -373,7 +391,7 @@ class TestLeaveAPI(TestCase):
         today = date.today()
         
         # Create approved leave for today
-        leave1 = LeaveRequestModel.objects.create(
+        LeaveRequestModel.objects.create(
             id=uuid4(),
             employee=self.employee,
             leave_type='ANNUAL',
@@ -383,7 +401,7 @@ class TestLeaveAPI(TestCase):
         )
         
         # Create approved leave for another employee for today
-        leave2 = LeaveRequestModel.objects.create(
+        LeaveRequestModel.objects.create(
             id=uuid4(),
             employee=self.employee2,
             leave_type='SICK',
@@ -457,9 +475,7 @@ class TestLeaveAPI(TestCase):
     
     def test_on_leave_count_uses_today_date_not_hardcoded(self):
         """Test that on-leave-count uses today's date (not hardcoded)."""
-        # This is a design test - we verify the endpoint works
         response = self.client.get('/api/leave/on-leave-count/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('as_of', response.data)
-        # The as_of should be today's date
         self.assertEqual(response.data['as_of'], str(date.today()))
